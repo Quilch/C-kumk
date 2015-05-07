@@ -2,6 +2,7 @@
 #include <math.h>
 
 int main(){
+	int roots_amount;
 	double a,b,c,x1,x2;
 	printf("a? ", a);
 	scanf("%lf", &a);
@@ -9,16 +10,25 @@ int main(){
 	scanf("%lf", &b);
 	printf("c? ", c);
 	scanf("%lf", &c);
-	roots(a, b, c, &x1, &x2);
-	printf("roots %f, %f", x1, x2);
+	roots_amount = roots(a, b, c, &x1, &x2);
+	printf("roots %f, %f, roots amount: %d", x1, x2, roots_amount);
 	getch();
 	return 0;
 }
-void roots(double a, double b, double c, double *x1, double *x2){
-	double d = sqrt((b*b)-(4*a*c));
-	*x1 =(-b+d)/(2*a);
-	if (d != 0){
-		*x2 = (-b-d)/(2*a);
+int roots(double a, double b, double c, double *x1, double *x2){
+	double d = (b*b)-(4*a*c);
+	if (d>=0){
+		*x1 =(-b+sqrt(d))/(2*a);
+		if (d != 0){
+			*x2 = (-b-sqrt(d))/(2*a);
+			return 2;
+		}
+		else{
+			return 1;
+		}
 	}
-	return;
+	else{
+		return 0;
+	}
+
 }
